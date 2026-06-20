@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>欢乐斗地主 · 知识库入口</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background: #f2f2f2;
+      font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      color: #2e2e2e;
+      line-height: 1.6;
+      padding: 2rem 1rem;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .container {
+      max-width: 1120px;
+      width: 100%;
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
+    }
+
+    /* 卡片通用设计：浅灰背景、细边框、柔和阴影 */
+    .card {
+      background: #ffffff;
+      border: 1px solid #e0e0e0;
+      border-radius: 20px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
+      padding: 2rem 1.8rem;
+      transition: box-shadow 0.2s ease;
+    }
+
+    .card:hover {
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.06);
+    }
+
+    /* 网格区域布局：目录式入口 */
+    .grid-layout {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+    }
+
+    /* 主入口 Hero 区 */
+    .hero-area {
+      grid-column: 1 / -1;
+      background: #ffffff;
+      border: 1px solid #e0e0e0;
+      border-radius: 20px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
+      padding: 2.8rem 2rem;
+      text-align: center;
+    }
+
+    .hero-area h1 {
+      font-size: 2.2rem;
+      font-weight: 600;
+      letter-spacing: -0.01em;
+      color: #1a1a1a;
+      margin-bottom: 0.6rem;
+    }
+
+    .hero-area .subhead {
+      font-size: 1.1rem;
+      color: #5c5c5c;
+      max-width: 600px;
+      margin: 0 auto 1.2rem auto;
+    }
+
+    .hero-area .tagline {
+      font-size: 0.95rem;
+      color: #777;
+      background: #f0f0f0;
+      display: inline-block;
+      padding: 0.3rem 1.2rem;
+      border-radius: 30px;
+      border: 1px solid #dadada;
+    }
+
+    /* 说明区：面向新用户快速识别用途 */
+    .intro-section p {
+      margin-bottom: 1rem;
+    }
+
+    .intro-section p:last-child {
+      margin-bottom: 0;
+    }
+
+    .intro-section strong {
+      color: #1a1a1a;
+    }
+
+    /* 特点卡片（两列） */
+    .feature-item {
+      background: #fafafa;
+      border: 1px solid #e8e8e8;
+      border-radius: 14px;
+      padding: 1.4rem 1.2rem;
+      margin-bottom: 0.8rem;
+    }
+
+    .feature-item:last-child {
+      margin-bottom: 0;
+    }
+
+    .feature-item h3 {
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: #1e1e1e;
+      margin-bottom: 0.3rem;
+    }
+
+    .feature-item p {
+      font-size: 0.95rem;
+      color: #4a4a4a;
+    }
+
+    .feature-tag {
+      display: inline-block;
+      background: #e5e5e5;
+      padding: 0.2rem 0.8rem;
+      border-radius: 40px;
+      font-size: 0.75rem;
+      font-weight: 500;
+      color: #3a3a3a;
+      margin-top: 0.5rem;
+      border: 1px solid #d2d2d2;
+    }
+
+    /* 提示区 */
+    .tips-area ul {
+      list-style: none;
+      padding-left: 0;
+    }
+
+    .tips-area li {
+      padding: 0.6rem 0 0.6rem 1.8rem;
+      position: relative;
+      border-bottom: 1px solid #eeeeee;
+    }
+
+    .tips-area li:last-child {
+      border-bottom: none;
+    }
+
+    .tips-area li::before {
+      content: "•";
+      position: absolute;
+      left: 0;
+      color: #8f8f8f;
+      font-weight: bold;
+      font-size: 1.2rem;
+    }
+
+    .tips-area em {
+      color: #3d3d3d;
+      font-style: italic;
+    }
+
+    /* FAQ 摘要区 */
+    .faq-item {
+      padding: 0.7rem 0;
+      border-bottom: 1px solid #ececec;
+    }
+
+    .faq-item:last-child {
+      border-bottom: none;
+    }
+
+    .faq-q {
+      font-weight: 600;
+      color: #1c1c1c;
+      margin-bottom: 0.2rem;
+    }
+
+    .faq-a {
+      color: #555;
+      font-size: 0.95rem;
+    }
+
+    /* 相关信息区：目录式链接与标签 */
+    .info-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+    }
+
+    .info-cell {
+      background: #f7f7f7;
+      border: 1px solid #e2e2e2;
+      border-radius: 14px;
+      padding: 1.2rem 1rem;
+      text-align: center;
+    }
+
+    .info-cell .label {
+      font-size: 0.8rem;
+      color: #8a8a8a;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      margin-bottom: 0.25rem;
+    }
+
+    .info-cell .value {
+      font-weight: 500;
+      color: #2b2b2b;
+    }
+
+    /* 自然链接嵌入 */
+    a {
+      color: #2c6b9e;
+      text-decoration: none;
+      border-bottom: 1px solid transparent;
+      transition: border-color 0.15s;
+    }
+
+    a:hover {
+      border-bottom-color: #2c6b9e;
+    }
+
+    /* 响应式 */
+    @media (max-width: 720px) {
+      body {
+        padding: 1.2rem 0.8rem;
+      }
+      .grid-layout {
+        grid-template-columns: 1fr;
+      }
+      .info-grid {
+        grid-template-columns: 1fr;
+      }
+      .hero-area h1 {
+        font-size: 1.8rem;
+      }
+      .card {
+        padding: 1.5rem 1.2rem;
+      }
+      .hero-area {
+        padding: 2rem 1.2rem;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .hero-area h1 {
+        font-size: 1.5rem;
+      }
+      .feature-item {
+        padding: 1rem;
+      }
+      .container {
+        gap: 1rem;
+      }
+    }
+
+    /* 底部轻提示 */
+    .fine-print {
+      margin-top: 0.5rem;
+      text-align: center;
+      color: #9a9a9a;
+      font-size: 0.85rem;
+      border-top: 1px solid #ddd;
+      padding-top: 1.5rem;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+
+    <!-- Hero 区域 -->
+    <div class="hero-area">
+      <h1>欢乐斗地主 · 知识库</h1>
+      <p class="subhead">规则 · 策略 · 玩法速查 &nbsp;|&nbsp; 面向所有想快速确认网站用途的访客</p>
+      <span class="tagline">📘 入口型目录 · 清晰说明 · 即时参考</span>
+    </div>
+
+    <!-- 说明区：从用户角度快速识别用途 -->
+    <div class="card intro-section">
+      <h2 style="font-size:1.3rem; font-weight:600; margin-bottom:0.8rem; color:#1f1f1f;">🔍 如何确认这个网站的用途？</h2>
+      <p>
+        如果你是第一次来到 <a href="https://doudizhu-huanle.com">欢乐斗地主</a> 相关页面，可能想快速弄清这里提供什么内容。本站整理了大量与斗地主有关的实用资料，包括通用规则、叫牌策略、记牌技巧和不同场次的差异说明。所有信息都经过归纳，方便你按需查阅，而不是零散地拼凑。
+      </p>
+      <p>
+        很多玩家关心的核心问题，比如：<strong>底牌如何分配？春天/反春天怎么算？</strong> 以及 <strong>不同倍数房间的准入条件</strong>，在这里都能找到简明解答。内容偏向知识整理，不包含任何软件下载或第三方跳转。
+      </p>
+      <p style="background:#f3f3f3; padding:0.8rem 1rem; border-radius:12px; border-left:3px solid #b0b0b0;">
+        💡 如果你只想快速浏览最常用的规则条目，可以重点关注下方的“特点与场景”和“常见问题摘要”两个卡片。
+      </p>
+    </div>
+
+    <!-- 两列布局：特点/场景 + 提示区 -->
+    <div class="grid-layout">
+
+      <!-- 特点与场景（卡片风格） -->
+      <div class="card" style="padding-bottom:1.6rem;">
+        <h2 style="font-size:1.2rem; font-weight:600; margin-bottom:1rem; color:#1f1f1f;">📌 特点与典型场景</h2>
+
+        <div class="feature-item">
+          <h3>经典三人场</h3>
+          <p>一人地主，两人农民。标准54张牌，叫分从1分起。适合熟悉基础节奏的玩家对照叫牌策略。</p>
+          <span class="feature-tag">规则参考</span>
+        </div>
+
+        <div class="feature-item">
+          <h3>癞子玩法</h3>
+          <p>翻出一张明牌作为万能癞子牌。场景中炸弹概率上升，记牌和算牌需要额外考虑癞子数量。</p>
+          <span class="feature-tag">变体规则</span>
+        </div>
+
+        <div class="feature-item">
+          <h3>不洗牌 / 快速场</h3>
+          <p>牌型分布更集中，容易出现连炸或大牌堆叠。适合练习判断牌权转换节奏。</p>
+          <span class="feature-tag">节奏差异</span>
+        </div>
+
+        <div style="margin-top:0.8rem; font-size:0.9rem; color:#6b6b6b; background:#f0f0f0; padding:0.4rem 1rem; border-radius:40px; display:inline-block;">
+          更多场景说明持续收录中
+        </div>
+      </div>
+
+      <!-- 提示区 -->
+      <div class="card tips-area">
+        <h2 style="font-size:1.2rem; font-weight:600; margin-bottom:0.8rem; color:#1f1f1f;">💬 使用提示</h2>
+        <ul>
+          <li>本页面的定位是信息索引，<em>所有内容均为通用知识整理</em>，不涉及具体游戏客户端。</li>
+          <li>如果遇到规则争议（例如“三带二是否允许带一对”），本站采用最广泛的通用规则作为默认答案。</li>
+          <li>想直接跳到 <a href="https://doudizhu-huanle.com">欢乐斗地主</a> 的资料首页，可以点击上方嵌入式链接。</li>
+          <li>建议搭配浏览器查找功能（Ctrl+F）快速定位关键词，例如“炸弹”、“春天”、“加倍”。</li>
+          <li>本站不存储任何个人数据，也不设用户登录，专注提供可复用的斗地主知识。</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- FAQ 摘要区  横向卡片 -->
+    <div class="card" style="padding-bottom:1.5rem;">
+      <h2 style="font-size:1.2rem; font-weight:600; margin-bottom:0.6rem; color:#1f1f1f;">❓ 常见问题摘要</h2>
+      <div class="faq-item">
+        <div class="faq-q">Q: 叫地主的最低起叫分是多少？</div>
+        <div class="faq-a">经典场通常为1分，部分房间可调至2分或3分。具体倍数需参考当前房间设置。</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">Q: 癞子场中，癞子可以当作任何牌吗？</div>
+        <div class="faq-a">癞子可作为除大小王以外的任意牌使用，但在组合炸弹时需注意数量限制。</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">Q: 春天/反春天的额外倍数如何计算？</div>
+        <div class="faq-a">一方一局未出完牌即结束，春天额外翻一倍；农民方未出完牌则反春天翻一倍（具体按房间规则浮动）。</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">Q: 这里能查到所有斗地主的变体规则吗？</div>
+        <div class="faq-a">本站以收录最常见、最通用的斗地主规则为主。区域性变体（如三人两副牌）作为扩展知识单独列出。</div>
+      </div>
+    </div>
+
+    <!-- 相关信息区：目录式入口卡片 -->
+    <div class="card" style="padding-bottom:1.6rem;">
+      <h2 style="font-size:1.2rem; font-weight:600; margin-bottom:1rem; color:#1f1f1f;">📂 相关信息目录</h2>
+      <div class="info-grid">
+        <div class="info-cell">
+          <div class="label">基础规则</div>
+          <div class="value">叫牌 · 出牌 · 计分</div>
+        </div>
+        <div class="info-cell">
+          <div class="label">记牌技巧</div>
+          <div class="value">牌型分布 · 关键张</div>
+        </div>
+        <div class="info-cell">
+          <div class="label">策略笔记</div>
+          <div class="value">叫地主时机 · 拆牌</div>
+        </div>
+        <div class="info-cell">
+          <div class="label">术语表</div>
+          <div class="value">春天 · 炸弹 · 飞机</div>
+        </div>
+      </div>
+      <div style="margin-top:1rem; font-size:0.9rem; color:#6b6b6b; text-align:center;">
+        ← 以上模块均可在主站 <a href="https://doudizhu-huanle.com">欢乐斗地主</a> 知识区找到对应文章
+      </div>
+    </div>
+
+    <div class="fine-print">
+      知识库入口 · 内容持续更新 &nbsp;·&nbsp; 本页仅用作信息索引
+    </div>
+
+  </div>
+</body>
+</html>
