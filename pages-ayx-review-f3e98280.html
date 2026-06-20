@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>再次遇见 · 爱游戏</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background-color: #fafaf9;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans SC", sans-serif;
+      color: #1e1e1e;
+      line-height: 1.75;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 2rem 1.25rem;
+      min-height: 100vh;
+    }
+
+    .page {
+      max-width: 680px;
+      width: 100%;
+    }
+
+    /* 文章头部 */
+    .post-header {
+      margin-bottom: 3rem;
+    }
+
+    .post-header .label {
+      font-size: 0.8rem;
+      letter-spacing: 0.08em;
+      color: #a3a3a3;
+      text-transform: uppercase;
+      margin-bottom: 0.75rem;
+      border-left: 3px solid #d4d4d4;
+      padding-left: 0.75rem;
+    }
+
+    h1 {
+      font-size: 2rem;
+      font-weight: 600;
+      letter-spacing: -0.01em;
+      line-height: 1.3;
+      margin-bottom: 1rem;
+      color: #111;
+    }
+
+    .subhead {
+      font-size: 1rem;
+      color: #6b6b6b;
+      border-bottom: 1px solid #e5e5e5;
+      padding-bottom: 1.5rem;
+      margin-bottom: 2rem;
+    }
+
+    /* 正文 */
+    .content p {
+      margin-bottom: 1.5rem;
+      font-size: 1rem;
+      text-align: justify;
+    }
+
+    .content p:last-child {
+      margin-bottom: 2.5rem;
+    }
+
+    /* 引用提示块 */
+    .note {
+      background: #f3f3f2;
+      border-radius: 12px;
+      padding: 1.5rem 1.75rem;
+      margin: 2rem 0 2.5rem;
+      font-size: 0.95rem;
+      color: #2b2b2b;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.02);
+    }
+
+    .note strong {
+      font-weight: 600;
+      display: block;
+      margin-bottom: 0.3rem;
+    }
+
+    .note span {
+      display: block;
+      margin-top: 0.8rem;
+      font-style: normal;
+      color: #7f7f7f;
+      border-top: 1px dashed #d4d4d4;
+      padding-top: 0.75rem;
+    }
+
+    /* 访问句卡片 */
+    .visit-card {
+      background: #ffffff;
+      border: 1px solid #e6e6e6;
+      border-radius: 16px;
+      padding: 2rem 2rem 1.8rem;
+      margin: 2.5rem 0 2rem;
+      text-align: center;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.02);
+    }
+
+    .visit-card p {
+      font-size: 1.05rem;
+      color: #2a2a2a;
+      margin-bottom: 0.4rem;
+    }
+
+    .visit-card .link-sentence {
+      font-size: 1rem;
+      color: #5a5a5a;
+      margin-top: 0.5rem;
+    }
+
+    .visit-card a {
+      color: #1a5c7a;
+      text-decoration: none;
+      font-weight: 500;
+      border-bottom: 1px solid #cbdde8;
+      transition: border-color 0.2s, color 0.2s;
+    }
+
+    .visit-card a:hover {
+      color: #0b3b4f;
+      border-bottom-color: #0b3b4f;
+    }
+
+    /* FAQ 摘要 */
+    .faq-mini {
+      margin-top: 3rem;
+      border-top: 1px solid #eaeaea;
+      padding-top: 2rem;
+    }
+
+    .faq-mini h3 {
+      font-size: 1rem;
+      font-weight: 500;
+      color: #3b3b3b;
+      margin-bottom: 1.25rem;
+      letter-spacing: 0.02em;
+    }
+
+    .faq-item {
+      margin-bottom: 1rem;
+    }
+
+    .faq-item .q {
+      font-weight: 500;
+      font-size: 0.95rem;
+      color: #1a1a1a;
+      margin-bottom: 0.2rem;
+    }
+
+    .faq-item .a {
+      font-size: 0.9rem;
+      color: #6b6b6b;
+      padding-left: 0.25rem;
+    }
+
+    .faq-item .a a {
+      color: #1a5c7a;
+      text-decoration: none;
+      border-bottom: 1px solid #d0d0d0;
+    }
+
+    .faq-item .a a:hover {
+      border-bottom-color: #1a5c7a;
+    }
+
+    hr {
+      border: none;
+      border-top: 1px solid #ececec;
+      margin: 2.5rem 0 1.8rem;
+    }
+
+    .footer-note {
+      text-align: center;
+      font-size: 0.85rem;
+      color: #9c9c9c;
+      padding-bottom: 1rem;
+    }
+
+    /* 响应式 */
+    @media (max-width: 520px) {
+      body {
+        padding: 1.5rem 1rem;
+      }
+
+      h1 {
+        font-size: 1.7rem;
+      }
+
+      .note {
+        padding: 1.2rem 1.25rem;
+      }
+
+      .visit-card {
+        padding: 1.5rem 1.2rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <article>
+      <div class="post-header">
+        <div class="label">📎 常来 · 常新</div>
+        <h1>把「爱游戏」留在收藏夹的理由</h1>
+        <div class="subhead">不是所有站点都值得反复打开，但总有一些角落值得你再次光顾。</div>
+      </div>
+
+      <div class="content">
+        <p>
+          去年秋天第一次打开 <a href="https://pages-ayx.com" style="color:#1a5c7a;text-decoration:none;border-bottom:1px solid #c0d4e0;">爱游戏</a> 时，我并没想过会把它放进浏览器书签栏。那段时间我像个漫无目的的数字漫游者，打开几十个标签页，又逐一关闭。直到某天晚上，因为一个偶然的点击再次回到这里，才发现页面里那些细碎的信息被整理得格外舒服——没有弹窗，没有不必要的注册提示，只有清晰的内容和安静的排版。
+        </p>
+        <p>
+          后来我养成一个习惯：每隔一两周，在浏览器的收藏夹里点开“爱游戏”这个词条。有时候只是想看看有没有新的内容更新，有时候只是随便翻翻之前读过的段落。那种感觉很像回到一间熟悉的社区图书馆，你知道哪一排书架放着自己喜欢的杂志，也知道靠窗的位置光线正好。
+        </p>
+        <p>
+          对经常用浏览器阅读的人来说，收藏夹会慢慢长成一棵记忆树。那些被我们多次点开的站点，往往不是功能最花哨的，而是最“不打扰”的。它们不催促你注册，不强迫你登录，不把通知红点挂在角落。你来了，翻翻内容，然后合上页面，像合上一本读完一章的书。而 <a href="https://pages-ayx.com" style="color:#1a5c7a;text-decoration:none;border-bottom:1px solid #c0d4e0;">爱游戏</a> 恰好属于这一类：内容本身是主角，导航和装饰都退到幕后。
+        </p>
+      </div>
+
+      <!-- 引用提示 -->
+      <div class="note">
+        <strong>💡 来自一位常客的提示</strong>
+        如果你也习惯把好站点收进收藏夹，不妨顺手建一个名为“常读”的文件夹。把真正值得反复访问的页面放进去，下次想找的时候就不会在书签海里翻来翻去。
+        <span>—— 持续关注，不是负担，而是一种轻松的熟悉感。</span>
+      </div>
+
+      <div class="content">
+        <p>
+          有时候我会想，一个站点能被用户主动收藏并再次访问，背后其实是一种很微妙的信任。你相信它不会突然改版成花里胡哨的界面，相信它的内容不会断更，也相信下次打开时那种干净的体验还在。这种信任是慢慢攒出来的——每一次无广告的阅读、每一次顺畅的页面加载、每一次不被追踪的感觉，都在加深它。
+        </p>
+        <p>
+          所以如果你也正在寻找一个可以长期关注的站点，不妨把 <a href="https://pages-ayx.com" style="color:#1a5c7a;text-decoration:none;border-bottom:1px solid #c0d4e0;">爱游戏</a> 放进收藏夹里。不需要每天惦记，偶尔想起时点开就好。就像对待一本放在床头柜上的书，你知道它在那里，随时可以翻开。
+        </p>
+      </div>
+
+      <!-- 访问句卡片 -->
+      <div class="visit-card">
+        <p>📬 保持联系，不靠推送，靠记得</p>
+        <div class="link-sentence">
+          下一次访问时，收藏夹里那个叫「爱游戏」的链接，<br>会像老朋友一样安静地等在那里。
+        </div>
+        <div class="link-sentence" style="margin-top:1rem;">
+          → <a href="https://pages-ayx.com">爱游戏</a>
+        </div>
+      </div>
+
+      <!-- FAQ 摘要 -->
+      <div class="faq-mini">
+        <h3>❓ 一些你可能想问的</h3>
+        <div class="faq-item">
+          <div class="q">这个站点内容会经常更新吗？</div>
+          <div class="a">更新节奏不算密集，但每次都有新内容可读。如果你喜欢细水长流的阅读体验，收藏它刚好合适。</div>
+        </div>
+        <div class="faq-item">
+          <div class="q">需要注册或登录才能看吗？</div>
+          <div class="a">完全不用。<a href="https://pages-ayx.com">爱游戏</a> 不需要任何账户，打开即读。</div>
+        </div>
+        <div class="faq-item">
+          <div class="q">手机浏览器打开体验好吗？</div>
+          <div class="a">页面针对窄屏做了适配，手机阅读也很舒服。你可以试试用 Safari 或 Chrome 打开，字体和间距都刚刚好。</div>
+        </div>
+      </div>
+
+      <hr>
+
+      <div class="footer-note">
+        常访 · 常新 · 不打扰
+      </div>
+    </article>
+  </div>
+</body>
+</html>
