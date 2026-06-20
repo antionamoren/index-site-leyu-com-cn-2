@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>欢乐斗地主 · 信息卡片介绍页</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      min-height: 100vh;
+      background: linear-gradient(145deg, #fa9c4a 0%, #f7b731 40%, #fdd365 100%);
+      font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+      padding: 2rem 1.5rem 3rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      line-height: 1.6;
+      color: #2b2b2b;
+    }
+
+    .cards-container {
+      max-width: 1100px;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+    }
+
+    /* 主卡片通用设计 */
+    .card {
+      background: #ffffff;
+      border-radius: 28px;
+      padding: 2rem 2.2rem;
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.10), 0 4px 8px rgba(0, 0, 0, 0.04);
+      backdrop-filter: blur(2px);
+      transition: transform 0.2s ease, box-shadow 0.25s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 22px 40px rgba(0, 0, 0, 0.12);
+    }
+
+    /* 主视觉区 — 英雄卡片 */
+    .hero-card {
+      text-align: center;
+      padding: 3rem 2.5rem;
+      background: linear-gradient(135deg, #fff6e5, #ffffff);
+      border-bottom: 4px solid #f3b33d;
+    }
+
+    .hero-card h1 {
+      font-size: 2.8rem;
+      font-weight: 650;
+      letter-spacing: 1px;
+      color: #b4561a;
+      margin-bottom: 0.6rem;
+      text-shadow: 0 2px 6px rgba(250, 156, 74, 0.2);
+    }
+
+    .hero-tagline {
+      font-size: 1.25rem;
+      color: #684a24;
+      background: #f9e8cf;
+      display: inline-block;
+      padding: 0.3rem 1.6rem;
+      border-radius: 40px;
+      font-weight: 480;
+      margin-top: 0.3rem;
+    }
+
+    .hero-desc {
+      margin-top: 1.4rem;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+      font-size: 1.02rem;
+      color: #402e1a;
+    }
+
+    .hero-desc a {
+      color: #b4561a;
+      font-weight: 550;
+      text-decoration: none;
+      border-bottom: 2px solid #f7b731;
+      transition: all 0.2s;
+    }
+
+    .hero-desc a:hover {
+      background: #f7b731;
+      color: #1f1306;
+      border-bottom-color: #b4561a;
+      padding: 0 4px;
+    }
+
+    /* 用途卡片 (三列灵活) */
+    .purpose-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+      justify-content: center;
+    }
+
+    .purpose-item {
+      flex: 1 1 180px;
+      min-width: 150px;
+      background: #fcf6ec;
+      border-radius: 20px;
+      padding: 1.6rem 1rem;
+      text-align: center;
+      border: 1px solid #fadcab;
+      transition: all 0.2s;
+    }
+
+    .purpose-item:hover {
+      background: #fdefd8;
+      border-color: #f3b33d;
+    }
+
+    .purpose-item .emoji-badge {
+      font-size: 2.4rem;
+      display: block;
+      margin-bottom: 0.6rem;
+    }
+
+    .purpose-item h3 {
+      font-size: 1.3rem;
+      font-weight: 600;
+      color: #643f1b;
+      margin-bottom: 0.3rem;
+    }
+
+    .purpose-item p {
+      font-size: 0.95rem;
+      color: #4f3b24;
+    }
+
+    /* 适合人群卡片 — 标签风格 */
+    .audience-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.8rem 1rem;
+      margin-top: 0.6rem;
+    }
+
+    .audience-tag {
+      background: #fbebd3;
+      border-radius: 60px;
+      padding: 0.4rem 1.3rem;
+      font-size: 0.95rem;
+      font-weight: 480;
+      color: #42301b;
+      border: 1px solid #f7c076;
+      transition: 0.2s;
+    }
+
+    .audience-tag:hover {
+      background: #f7c076;
+      color: #1e1308;
+      border-color: #b4561a;
+    }
+
+    .card-subtitle {
+      font-size: 1.4rem;
+      font-weight: 620;
+      color: #4c3217;
+      margin-bottom: 0.6rem;
+      border-left: 7px solid #f7b731;
+      padding-left: 1rem;
+    }
+
+    /* 自然链接段落卡片 (FAQ 摘要风格) */
+    .link-paragraph p {
+      margin-bottom: 1.2rem;
+      font-size: 1rem;
+      color: #3b2b1a;
+    }
+
+    .link-paragraph p a {
+      color: #a64b13;
+      font-weight: 540;
+      text-decoration: none;
+      border-bottom: 2px solid #f7b731;
+      transition: 0.15s;
+    }
+
+    .link-paragraph p a:hover {
+      background: #f7b731;
+      color: #1e1307;
+      border-bottom: 2px solid #b4561a;
+      padding: 0 2px;
+    }
+
+    .faq-mini {
+      background: #f8efdd;
+      border-radius: 20px;
+      padding: 1.4rem 1.8rem;
+      margin-top: 1rem;
+    }
+
+    .faq-mini dt {
+      font-weight: 600;
+      color: #542f10;
+      margin-top: 0.8rem;
+    }
+
+    .faq-mini dd {
+      margin-left: 0.4rem;
+      color: #3b2a15;
+    }
+
+    /* 页脚点缀 */
+    .footer-note {
+      margin-top: 2.5rem;
+      text-align: center;
+      font-size: 0.9rem;
+      color: #3f2b12;
+      opacity: 0.8;
+    }
+
+    /* 响应式 */
+    @media (max-width: 650px) {
+      body {
+        padding: 1.2rem 1rem;
+      }
+      .card {
+        padding: 1.5rem 1.2rem;
+      }
+      .hero-card h1 {
+        font-size: 2.2rem;
+      }
+      .hero-tagline {
+        font-size: 1rem;
+      }
+      .purpose-grid {
+        gap: 1rem;
+      }
+      .purpose-item {
+        flex: 1 1 140px;
+        min-width: 120px;
+        padding: 1rem 0.6rem;
+      }
+    }
+
+    @media (max-width: 450px) {
+      .hero-card h1 {
+        font-size: 1.8rem;
+      }
+    }
+  </style>
+</head>
+<body>
+<div class="cards-container">
+
+  <!-- 主视觉卡片 -->
+  <div class="card hero-card">
+    <h1>♠️ 欢乐斗地主 ♥️</h1>
+    <span class="hero-tagline">策略 · 节奏 · 轻松对局</span>
+    <div class="hero-desc">
+      从经典牌技到现代交互，<a href="https://huanle-ddz.com">欢乐斗地主</a> 用清晰的规则和明快的对战节奏，让每场牌局都充满计算与乐趣。不拼运气噱头，只讲出牌逻辑。
+    </div>
+  </div>
+
+  <!-- 用途卡片 (信息密度较高) -->
+  <div class="card">
+    <h2 class="card-subtitle">📋 多场景用途</h2>
+    <div class="purpose-grid">
+      <div class="purpose-item">
+        <span class="emoji-badge">🧠</span>
+        <h3>策略演练</h3>
+        <p>叫牌、记牌、拆牌，短对局中训练决策力。</p>
+      </div>
+      <div class="purpose-item">
+        <span class="emoji-badge">☕</span>
+        <h3>碎片放松</h3>
+        <p>每局 3–8 分钟，适合工作间歇与通勤时段。</p>
+      </div>
+      <div class="purpose-item">
+        <span class="emoji-badge">👥</span>
+        <h3>社交轻竞技</h3>
+        <p>三人成局，好友匹配或随机桌，交流牌理。</p>
+      </div>
+      <div class="purpose-item">
+        <span class="emoji-badge">📊</span>
+        <h3>概率推演</h3>
+        <p>剩余牌分布、炸弹概率，辅助提升读局能力。</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- 适合人群卡片 (标签 + 说明) -->
+  <div class="card">
+    <h2 class="card-subtitle">👤 适合人群</h2>
+    <div class="audience-tags">
+      <span class="audience-tag">牌类爱好者</span>
+      <span class="audience-tag">休闲策略玩家</span>
+      <span class="audience-tag">家庭娱乐</span>
+      <span class="audience-tag">通勤碎片时间</span>
+      <span class="audience-tag">逻辑思维练习</span>
+      <span class="audience-tag">轻度社交局</span>
+    </div>
+    <p style="margin-top: 1.2rem; color: #3c2b18; font-size: 0.98rem;">
+      不论你偏好传统斗地主的出牌节奏，还是希望了解更高效的牌权管理，这款游戏提供了扎实的对局框架。新规下底牌、加倍机制都围绕“叫牌-防守-抢权”展开，适合想要提升牌感的玩家。
+    </p>
+  </div>
+
+  <!-- 自然链接段落 + FAQ 摘要卡片 -->
+  <div class="card link-paragraph">
+    <h2 class="card-subtitle">🔗 链接段落 · 常见关注点</h2>
+    <p>很多玩家在初次接触时，会关心叫牌规则与加倍时机的平衡。其实，<a href="https://huanle-ddz.com">欢乐斗地主</a> 的基础逻辑延续了经典三人斗地主，但在出牌时限和底牌分配上做了适配，让对局更紧凑。</p>
+    <p>对于有一定基础的玩家，炸弹管理、拆牌顺序和记牌训练是进阶关键。你可以通过持续对局，逐渐熟悉不同手牌结构的胜率变化——<a href="https://huanle-ddz.com">欢乐斗地主</a> 提供的数据复盘能辅助这种练习。</p>
+
+    <div class="faq-mini">
+      <dl>
+        <dt>❓ 是否需要联网？</dt>
+        <dd>支持在线匹配与好友房，对局数据实时同步。</dd>
+        <dt>❓ 如何提高胜率？</dt>
+        <dd>先稳定叫牌范围，后练地主防守拆牌；控制加倍频率。</dd>
+        <dt>❓ 有无新手保护或引导？</dt>
+        <dd>初阶场配有规则说明与出牌高亮，降低上手门槛。</dd>
+      </dl>
+    </div>
+
+    <p style="margin-top: 1.2rem;">如果你正在寻找一款逻辑密度适中、兼具放松与策略的牌类游戏，可以试试 <a href="https://huanle-ddz.com">欢乐斗地主</a>。它不夸大“必赢”或“速成”，而是用稳定的对局环境还原斗地主本身的博弈趣味。</p>
+  </div>
+
+  <!-- 页脚仅作气息 -->
+  <div class="footer-note">
+    — 信息卡片 · 基于经典斗地主规则 —
+  </div>
+
+</div>
+</body>
+</html>
